@@ -1,0 +1,21 @@
+<?xml version='1.0' ?>
+<orders>
+	<order>
+		<ordId>101</ordId>
+		<custId>C1</custId>
+		<custAdd>Pune</custAdd>
+		<ordAmt>1000</ordAmt>
+	</order>
+	<order>
+		<ordId>111</ordId>
+		<custId>C5</custId>
+		<custAdd>Mumbai</custAdd>
+		<ordAmt>3000</ordAmt>
+	</order>
+	<order>
+		<ordId>123</ordId>
+		<custId>C4</custId>
+		<custAdd>Delhi</custAdd>
+		<ordAmt>4000</ordAmt>
+	</order>
+</orders>

@@ -1,0 +1,139 @@
+import sqlite3
+ sqlite3.connect('student.db')
+
+ conn.execute('CREATE TABLE STUDENT(ID INT PRIMARY KEY,NAME CHAR(10),MARKS REAL)')
+<sqlite3.Cursor object at 0x02A21A20>
+
+ conn.execute("INSERT INTO STUDENT(ID,NAME,MARKS) VALUES(101,'Vinay',95.5)")
+<sqlite3.Cursor object at 0x02A21A60>
+
+ conn.execute("INSERT INTO STUDENT(ID,NAME,MARKS) VALUES(102,'Ajay',85.5)")
+<sqlite3.Cursor object at 0x02A21A20>
+
+ try:
+	conn.execute("INSERT INTO STUDENT(ID,NAME,MARKS) VALUES(102,'Ajay',85.5)")
+except sqlite3.IntegrityError as e:
+	print(e)
+
+	
+ conn.execute("INSERT INTO STUDENT(ID,NAME,MARKS) VALUES(103,'Amit',75.5)")
+<sqlite3.Cursor object at 0x02A21AE0>
+ conn.execute("INSERT INTO STUDENT(ID,NAME,MARKS) VALUES(104,'Vikas',45.5)")
+<sqlite3.Cursor object at 0x02A21A20>
+ cur=conn.execute('SELECT ID<MARKS FROM STUDENT')
+ for val in cur:
+	print(val)
+
+	
+(0,)
+(0,)
+(0,)
+(0,)
+ cur=conn.execute('SELECT ID,MARKS FROM STUDENT')
+ for val in cur:
+	print(val)
+
+	
+(101, 95.5)
+(102, 85.5)
+(103, 75.5)
+(104, 45.5)
+ cur=conn.execute('SELECT ID,MARKS,NAME FROM STUDENT')
+ for val in cur:
+	print(val)
+
+(101, 95.5, 'Vinay')
+(102, 85.5, 'Ajay')
+(103, 75.5, 'Amit')
+(104, 45.5, 'Vikas')
+ b=list(cur)
+ b
+[]
+ cur=conn.execute('SELECT ID,MARKS,NAME FROM STUDENT')
+ for val in cur:
+	print(val)
+
+	
+(101, 95.5, 'Vinay')
+(102, 85.5, 'Ajay')
+(103, 75.5, 'Amit')
+(104, 45.5, 'Vikas')
+ b=list(cur)
+ b
+[]
+ cur=conn.execute('SELECT ID,MARKS,NAME FROM STUDENT')
+ b=list(cur)
+ b
+[(101, 95.5, 'Vinay'), (102, 85.5, 'Ajay'), (103, 75.5, 'Amit'), (104, 45.5, 'Vikas')]
+ for i in b:
+	print(i)
+
+	
+(101, 95.5, 'Vinay')
+(102, 85.5, 'Ajay')
+(103, 75.5, 'Amit')
+(104, 45.5, 'Vikas')
+ type(cur)
+<class 'sqlite3.Cursor'>
+ cur=conn.execute('DELETE FROM STUDENT WHERE MARKS < 60')
+ cur=conn.execute('SELECT ID,MARKS,NAME FROM STUDENT')
+ for val in cur:
+	print(val)
+
+	
+(101, 95.5, 'Vinay')
+(102, 85.5, 'Ajay')
+(103, 75.5, 'Amit')
+ conn.rollback()
+ for val in cur:
+	print(val)
+
+	
+Traceback (most recent call last):
+  File "<pyshell#47>", line 1, in <module>
+    for val in cur:
+sqlite3.InterfaceError: Cursor needed to be reset because of commit/rollback and can no longer be fetched from.
+ cur=conn.execute('SELECT ID,MARKS,NAME FROM STUDENT')
+ for val in cur:
+	print(val)
+
+	
+ conn.close()
+ conn=sqlite3.connect('student.db')
+ conn.execute("INSERT INTO STUDENT(ID,NAME,MARKS) VALUES(101,'Vinay',95.5)")
+<sqlite3.Cursor object at 0x02A21B20>
+ conn.execute("INSERT INTO STUDENT(ID,NAME,MARKS) VALUES(102,'Ajay',85.5)")
+<sqlite3.Cursor object at 0x02A21A60>
+ conn.execute("INSERT INTO STUDENT(ID,NAME,MARKS) VALUES(103,'Amit',75.5)")
+<sqlite3.Cursor object at 0x02A21B20>
+ conn.execute("INSERT INTO STUDENT(ID,NAME,MARKS) VALUES(104,'Vikas',45.5)")
+<sqlite3.Cursor object at 0x02A21A60>
+ cur=conn.execute('SELECT ID,MARKS,NAME FROM STUDENT')
+ for val in cur:
+	print(val)
+
+(101, 95.5, 'Vinay')
+(102, 85.5, 'Ajay')
+(103, 75.5, 'Amit')
+(104, 45.5, 'Vikas')
+ conn.execute('UPDATE student SET marks=99 WHERE id <= 102')
+<sqlite3.Cursor object at 0x02A21A20>
+ cur=conn.execute('SELECT ID,MARKS,NAME FROM STUDENT')
+ for val in cur:
+	print(val)
+
+	
+(101, 99.0, 'Vinay')
+(102, 99.0, 'Ajay')
+(103, 75.5, 'Amit')
+(104, 45.5, 'Vikas')
+
+id = 111
+name="Raj"
+marks=55
+
+conn.execute("INSERT INTO STUDENT VALUES(?,?,?)",(id,name,marks))
+
+ conn.commit()
+ conn.close()
+ 
